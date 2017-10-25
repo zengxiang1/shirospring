@@ -1,9 +1,8 @@
-package org.zx.learn.shiro;
+package org.zx.learn.shiro.filter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,7 @@ public class ZxFormAuthenticationFilter extends FormAuthenticationFilter{
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        log.debug("Request Path:{}", httpServletRequest.getRequestURL());
+        log.info("Request Path:{}", httpServletRequest.getRequestURL());
         return super.preHandle(request, response);
     }
 

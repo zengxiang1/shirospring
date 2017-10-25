@@ -68,7 +68,7 @@
   <bean id="zxAuthorizingRealm" class="org.zx.learn.shiro.realm.ZxAuthorizingRealm">
   </bean>
 
-  <bean id="zxFormAuthenticationFilter" class="org.zx.learn.shiro.ZxFormAuthenticationFilter">
+  <bean id="zxFormAuthenticationFilter" class="org.zx.learn.shiro.filter.ZxFormAuthenticationFilter">
     <property name="loginUrl" value="/login" />
     <property name="successUrl" value="/admin/admin.jsp"/>
     <property name="usernameParam" value="username"/>
