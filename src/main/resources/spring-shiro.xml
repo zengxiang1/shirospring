@@ -32,6 +32,8 @@
       <value>
         <!--/admin/** = authc, roles[admin]-->
         <!--/docs/** = authc, perms[document:read]-->
+        /pages/** = anon
+
         /** = authc
         <!--/login = anon-->
         <!--/index.jsp = anon-->

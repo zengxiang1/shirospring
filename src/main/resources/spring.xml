@@ -8,6 +8,7 @@
   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
   <mvc:annotation-driven/>
+  <mvc:resources mapping="/pages/**" location="/pages/"/>
   <context:component-scan base-package="org.zx"></context:component-scan>
   <import resource="spring-*.xml"/>
 
