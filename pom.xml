@@ -9,12 +9,15 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+    <facades-version>1.0.2</facades-version>
     <spring-version>4.3.11.RELEASE</spring-version>
     <shiro-version>1.4.0</shiro-version>
     <druid-version>1.1.3</druid-version>
     <mysql-connector>5.1.44</mysql-connector>
     <spring-redis-version>1.8.8.RELEASE</spring-redis-version>
     <redis-version>2.9.0</redis-version>
+    <dubbo-version>2.5.6</dubbo-version>
+    <zkclient-version>0.10</zkclient-version>
   </properties>
   <dependencies>
     <!--spring -->
@@ -23,6 +26,24 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>${spring-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>dubbo</artifactId>
+      <version>${dubbo-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.101tec</groupId>
+      <artifactId>zkclient</artifactId>
+      <version>${zkclient-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.zx</groupId>
+      <artifactId>facades</artifactId>
+      <version>${facades-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -34,8 +55,6 @@
       <artifactId>spring-test</artifactId>
       <version>${spring-version}</version>
     </dependency>
-
-
 
     <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
     <dependency>
@@ -129,7 +148,7 @@
 
   </dependencies>
   <build>
-    <finalName>shirospring</finalName>
+    <finalName>${project.name}</finalName>
     <plugins>
       <plugin>
           <groupId>org.mybatis.generator</groupId>
