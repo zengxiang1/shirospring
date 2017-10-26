@@ -9,7 +9,7 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <facades-version>1.0.4</facades-version>
+    <facades-version>1.0.6</facades-version>
     <spring-version>4.3.11.RELEASE</spring-version>
     <shiro-version>1.4.0</shiro-version>
     <druid-version>1.1.3</druid-version>
