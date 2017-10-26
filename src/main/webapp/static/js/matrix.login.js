@@ -8,6 +8,11 @@ function keydown(e)
     }
 }
 
+
+function checkLogin() {
+  $('#loginform').submit();
+}
+
 function validatePwd(str){   
     if(str.length!=0){    
         reg=/^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/;     

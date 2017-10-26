@@ -8,7 +8,12 @@
   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
   <mvc:annotation-driven/>
-  <context:component-scan base-package="org.zx"></context:component-scan>
-  <import resource="spring-*.xml"/>
-
+  <mvc:resources mapping="/static/**" location="/static/">
+    <mvc:cache-control max-age="3600" cache-public="true"/>
+  </mvc:resources>
+  <bean id="resolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jsp"/>
+    <property name="suffix" value=".jsp"/>
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+  </bean>
 </beans>

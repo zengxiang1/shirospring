@@ -20,9 +20,9 @@ public class LoginController {
     public String login(HttpServletRequest request){
         logger.info("check login......");
         if (SecurityUtils.getSubject().isAuthenticated()) {
-            return "/admin/admin.jsp";
+            return "/admin/admin";
         }else{
-            return "/index.jsp";
+            return "/login";
         }
     }
 

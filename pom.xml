@@ -18,6 +18,7 @@
     <redis-version>2.9.0</redis-version>
     <dubbo-version>2.5.6</dubbo-version>
     <zkclient-version>0.10</zkclient-version>
+    <jstl-version>1.2</jstl-version>
   </properties>
   <dependencies>
     <!--spring -->
@@ -108,6 +109,13 @@
       </exclusions>
       <version>${spring-redis-version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${jstl-version}</version>
+    </dependency>
+
 
     <dependency>
       <groupId>redis.clients</groupId>
