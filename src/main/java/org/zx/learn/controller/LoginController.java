@@ -1,38 +1,44 @@
-package org.zx.learn;
+package org.zx.learn.controller;
 
-import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.ShiroException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.zx.learn.service.UserService;
 
 /**
  * Created by xiang zeng on 2017/10/1.
  */
 @Controller
 public class LoginController {
+
+    @Autowired
+    private UserService  userService;
     private  Logger logger = LoggerFactory.getLogger(LoginController.class);
     @RequestMapping("/login")
     public ModelAndView login(HttpServletRequest request){
         logger.info("check login......");
         ModelAndView modelAndView = new ModelAndView();
         if (SecurityUtils.getSubject().isAuthenticated()) {
+            modelAndView.addObject("menuList",userService.listAllMenu());
             modelAndView.setViewName("/admin/admin");;
         }else{
             String exceptionName = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-            if (exceptionName.contains("UnknownAccountException")){
-                modelAndView.addObject("msg","账户不存在");
-            } else if (exceptionName.contains("AccountException")) {
-                modelAndView.addObject("msg","账号异常");
-            } else if (exceptionName.contains("IncorrectCredentialsException")){
-                modelAndView.addObject("msg","密码错误");
+            if(exceptionName != null && !"".equals(exceptionName)){
+                if (exceptionName.contains("UnknownAccountException")){
+                    modelAndView.addObject("msg","账户不存在");
+                } else if (exceptionName.contains("AccountException")) {
+                    modelAndView.addObject("msg","账号异常");
+                } else if (exceptionName.contains("IncorrectCredentialsException")){
+                    modelAndView.addObject("msg","密码错误");
+                }
             }
             modelAndView.setViewName("/login");
         }

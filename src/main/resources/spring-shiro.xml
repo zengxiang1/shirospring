@@ -50,7 +50,13 @@
   </bean>
 
   <bean id="zxAuthorizingRealm" class="org.zx.learn.shiro.realm.ZxAuthorizingRealm">
+    <property name="credentialsMatcher">
+      <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+      </bean>
+    </property>
   </bean>
+
 
   <bean id="zxFormAuthenticationFilter" class="org.zx.learn.shiro.filter.ZxFormAuthenticationFilter">
     <property name="loginUrl" value="/login" />

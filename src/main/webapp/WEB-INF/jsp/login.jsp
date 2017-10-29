@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <title>后台管理界面</title><meta charset="UTF-8" />
@@ -64,6 +65,7 @@
                 </div>
             </div>
         </div>
+
         <div class="control-group">
             <label class="control-label">180字留言（电话、姓名、问题等）</label>
             <div class="controls">
@@ -84,14 +86,39 @@
             推荐使用支持HTML5的浏览器，如chrome、IE9+等
         </div>
     </form>
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">提示信息</h4>
+                </div>
+                <div class="modal-body">
+                   <h4 id="msg" style="font-family: Arial"></h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
 </div>
+
+
 
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/matrix.login.js"></script>
-
+<script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
 <!-- scripts -->
 <script src="${pageContext.request.contextPath}/static/js/particles.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/particlesapp.js"></script>
-
+<c:if test="${msg != null}">
+    <script type="text/javascript">
+      $('#msg').text('${msg}');
+      $('.modal').modal('show');
+    </script>
+</c:if>
 </body>
 </html>

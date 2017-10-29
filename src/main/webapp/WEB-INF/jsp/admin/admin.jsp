@@ -18,10 +18,6 @@
     </div>
     <!--end-main-container-part-->
 
-    <script src="${pageContext.request.contextPath}/static/js/excanvas.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/jquery.ui.custom.js"></script> 
-    <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/matrix.js"></script>
 </body>
+<jsp:include page="common/bottom.jsp"/>
 </html>
