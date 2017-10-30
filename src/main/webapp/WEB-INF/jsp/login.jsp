@@ -108,7 +108,7 @@
 
 
 
-<script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/matrix.login.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
 <!-- scripts -->

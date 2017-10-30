@@ -189,7 +189,7 @@ $(document).ready(function(){
 	});
 	
 
-	$('#lightbox').live('click', function() { 
+	$('#lightbox').on('click','a', function() {
 		$('#lightbox').hide(200);
 	});
 	
