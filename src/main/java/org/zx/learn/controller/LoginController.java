@@ -24,7 +24,7 @@ public class LoginController {
     private  Logger logger = LoggerFactory.getLogger(LoginController.class);
     @RequestMapping("/login")
     public ModelAndView login(HttpServletRequest request){
-        logger.info("check login......");
+        logger.info("check login.......");
         ModelAndView modelAndView = new ModelAndView();
         if (SecurityUtils.getSubject().isAuthenticated()) {
             modelAndView.addObject("menuList",userService.listAllMenu());
