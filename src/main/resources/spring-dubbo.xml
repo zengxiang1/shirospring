@@ -11,7 +11,7 @@
   <dubbo:application name="data-consumer" owner="zx" organization="zx"/>
   <dubbo:protocol port="20883"/>
 
-  <dubbo:reference id="userService" interface="org.zx.learn.service.UserService" timeout="1000"/>
-  <dubbo:reference id="roleService" interface="org.zx.learn.service.RoleService" timeout="1000"/>
+  <dubbo:reference id="userService" interface="org.zx.learn.service.UserService" />
+  <dubbo:reference id="roleService" interface="org.zx.learn.service.RoleService" />
 
 </beans>
