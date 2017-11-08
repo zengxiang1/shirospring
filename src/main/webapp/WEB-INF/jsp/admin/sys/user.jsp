@@ -75,23 +75,25 @@
 <script type="text/javascript">
     function onDeleteClick(id,value) {
 
-        var a= $("#userTable").bootstrapTable('getSelections');
+        var row=$.map($("#userTable").bootstrapTable('getSelections'),function(row){
+            return row ;
+        });
+        console.log(JSON.stringify(row));
 
-        alert(a.length);
-        <%--$.ajax({--%>
-            <%--url:"${pageContext.request.contextPath}/resource/user/deleteUserInfo",--%>
-            <%--method:'POST',--%>
-            <%--dataType:'JSON',--%>
-            <%--contentType:'application/json',--%>
-            <%--data:JSON.stringify([{id:id}]),--%>
-            <%--success:function (result) {--%>
-                <%--if (0 == result.code){--%>
-                    <%--console.log(result.code)--%>
-                    <%--$('#userTable').bootstrapTable('refresh', {silent: true})--%>
-                    <%--$('#userTable').bootstrapTable('removeAll','');--%>
-                <%--}--%>
-            <%--}--%>
-        <%--});--%>
+        $.ajax({
+            url:"${pageContext.request.contextPath}/resource/user/deleteUserInfo",
+            method:'POST',
+            dataType:'JSON',
+            contentType:'application/json;charset=utf-8',
+            data:JSON.stringify(row),
+            success:function (result) {
+                if (0 == result.code){
+                    console.log(result.code)
+                    $('#userTable').bootstrapTable('refresh', {silent: true})
+                    $('#userTable').bootstrapTable('removeAll','');
+                }
+            }
+        });
     }
     
 </script>

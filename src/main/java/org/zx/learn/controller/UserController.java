@@ -47,6 +47,7 @@ public class UserController extends BaseController{
     @RequestMapping(value = "deleteUserInfo", consumes = MediaType.APPLICATION_JSON_VALUE, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<ResultEntity> deleteUserInfo(@RequestBody List<UserDTO> userDTOS){
+
         List<Integer> ids = new ArrayList<Integer>();
         for (UserDTO userDTO : userDTOS) {
             ids.add(userDTO.getId());
