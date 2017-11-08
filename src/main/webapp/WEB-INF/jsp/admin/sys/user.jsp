@@ -78,14 +78,22 @@
         var row=$.map($("#userTable").bootstrapTable('getSelections'),function(row){
             return row ;
         });
-        console.log(JSON.stringify(row));
+        var ids;
+
+        if (row.length == 0){
+            ids = JSON.stringify([{id:id}]);
+        }else
+        {
+            ids = JSON.stringify(row)
+        }
+        console.log(ids);
 
         $.ajax({
             url:"${pageContext.request.contextPath}/resource/user/deleteUserInfo",
             method:'POST',
             dataType:'JSON',
             contentType:'application/json;charset=utf-8',
-            data:JSON.stringify(row),
+            data:ids,
             success:function (result) {
                 if (0 == result.code){
                     console.log(result.code)
