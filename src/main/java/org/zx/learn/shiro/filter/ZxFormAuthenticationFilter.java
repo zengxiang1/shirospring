@@ -28,13 +28,25 @@ public class ZxFormAuthenticationFilter extends FormAuthenticationFilter{
         return super.preHandle(request, response);
     }
 
+    @Override
+    protected void issueSuccessRedirect(ServletRequest request, ServletResponse response)
+        throws Exception {
+        request.getRequestDispatcher(getSuccessUrl()).forward(request, response);
+    }
+
 
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
         try {
             String jsonParam = JsonParamUtils.getRequestJsonString((HttpServletRequest)request);
             JsonObject paramObject = new JsonParser().parse(jsonParam).getAsJsonObject();
-            return super.createToken(paramObject.get(getUsernameParam()).getAsString(),paramObject.get(getPasswordParam()).getAsString(),request,response);
+            if (paramObject.has(getUsernameParam())) {
+                return super.createToken(paramObject.get(getUsernameParam()).getAsString(),paramObject.get(getPasswordParam()).getAsString(),request,response);
+            }
+            else {
+                return super.createToken(getUsername(request), getPassword(request), request, response);
+            }
+
         } catch (IOException e) {
             throw new ServiceException(8,"认证信息获取失败");
         }

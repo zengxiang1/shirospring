@@ -56,10 +56,11 @@ public class LoginController extends BaseController{
     }
 
     @RequestMapping(value = "/loginWeb")
+    @ResponseBody
     public ResponseEntity<ResultEntity> loginWeb(HttpServletRequest request) {
         logger.info("check login.......");
         if (SecurityUtils.getSubject().isAuthenticated()){
-            return buildSuccessResult();
+            return buildSuccessResult(userService.listAllMenu());
         }
         else {
             String exceptionName = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);

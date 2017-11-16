@@ -60,7 +60,7 @@
 
   <bean id="zxFormAuthenticationFilter" class="org.zx.learn.shiro.filter.ZxFormAuthenticationFilter">
     <property name="loginUrl" value="/loginWeb" />
-    <property name="successUrl" value="/login"/>
+    <property name="successUrl" value="/loginWeb"/>
     <property name="usernameParam" value="username"/>
     <property name="passwordParam" value="password"/>
   </bean>
