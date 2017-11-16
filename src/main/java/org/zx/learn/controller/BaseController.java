@@ -24,6 +24,7 @@ public class BaseController {
         return new ResponseEntity<ResultEntity>(resultEntity, HttpStatus.OK);
     }
 
+
     public  ResponseEntity<ResultEntity> buildSuccessResult(){
         ResultEntity resultEntity = new ResultEntity();
         resultEntity.setCode(0);
@@ -46,5 +47,10 @@ public class BaseController {
             resultEntity = new ResultEntity(1, ex.getMessage());
         }
         return new ResponseEntity<ResultEntity>(resultEntity, HttpStatus.OK);
+    }
+    public ResponseEntity<ResultEntity> buildErrorResult(Integer code, String msg){
+        ResultEntity resultEntity = new ResultEntity(code, msg);
+        return new ResponseEntity<ResultEntity>(resultEntity, HttpStatus.OK);
+
     }
 }

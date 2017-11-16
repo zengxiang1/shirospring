@@ -3,9 +3,18 @@ package org.zx.learn.shiro.filter;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zx.learn.exception.ServiceException;
+import org.zx.learn.utils.JsonParamUtils;
+
+import java.io.IOException;
 
 /**
  * Created by xiang zeng on 2017/10/22.
@@ -19,9 +28,15 @@ public class ZxFormAuthenticationFilter extends FormAuthenticationFilter{
         return super.preHandle(request, response);
     }
 
+
     @Override
-    protected void issueSuccessRedirect(ServletRequest request, ServletResponse response)
-        throws Exception {
-        request.getRequestDispatcher(getSuccessUrl()).forward(request, response);
+    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+        try {
+            String jsonParam = JsonParamUtils.getRequestJsonString((HttpServletRequest)request);
+            JsonObject paramObject = new JsonParser().parse(jsonParam).getAsJsonObject();
+            return super.createToken(paramObject.get(getUsernameParam()).getAsString(),paramObject.get(getPasswordParam()).getAsString(),request,response);
+        } catch (IOException e) {
+            throw new ServiceException(8,"认证信息获取失败");
+        }
     }
 }
