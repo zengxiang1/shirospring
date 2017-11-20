@@ -11,11 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.zx.learn.dto.SysRoleDTO;
 import org.zx.learn.entity.ResultEntity;
@@ -48,6 +44,8 @@ public class RoleController extends BaseController{
 
         return buildSuccessResult(sysRoleDTOS);
     }
+
+
     @RequestMapping(value = "delete", consumes = MediaType.APPLICATION_JSON_VALUE, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<ResultEntity> delete(@RequestBody List<SysRoleDTO> sysRoleDTOS){
@@ -58,4 +56,27 @@ public class RoleController extends BaseController{
         roleService.deleteRoleById(ids);
         return buildSuccessResult();
     }
+
+    @RequestMapping( value = "/listTopRole",produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResultEntity> listTopRole() {
+        List<SysRoleDTO> sysRoleDTOS = roleService.listTopRole();
+        return buildSuccessResult(sysRoleDTOS);
+    }
+
+    @RequestMapping( value = "/listByParent/{id}",produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResultEntity> listByParent(@PathVariable Integer id) {
+        List<SysRoleDTO> sysRoleDTOS = roleService.listRoleByParent(id);
+        return buildSuccessResult(sysRoleDTOS);
+    }
+
+    @RequestMapping( value = "/save",produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ResultEntity> listByParent(@RequestBody SysRoleDTO sysRoleDTO) {
+        roleService.saveSysRole(sysRoleDTO);
+        return buildSuccessResult();
+    }
+
+
 }

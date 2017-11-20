@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.zx.learn.entity.ResultEntity;
+import org.zx.learn.exception.ExceptionMsg;
 import org.zx.learn.service.UserService;
 
 /**
@@ -73,7 +74,7 @@ public class LoginController extends BaseController{
                     return buildErrorResult(12, "密码错误");
                 }
             }
-            return buildErrorResult(13,"请先登录");
+            return buildErrorResult(ExceptionMsg.AUTHENTICATE_ERROR_MSG.getCode(), ExceptionMsg.AUTHENTICATE_ERROR_MSG.getMsg());
         }
     }
     @ResponseBody
