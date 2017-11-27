@@ -11,6 +11,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zx.learn.exception.ExceptionMsg;
 import org.zx.learn.exception.ServiceException;
 import org.zx.learn.utils.JsonParamUtils;
 
@@ -48,7 +49,7 @@ public class ZxFormAuthenticationFilter extends FormAuthenticationFilter{
             }
 
         } catch (IOException e) {
-            throw new ServiceException(8,"认证信息获取失败");
+            throw new ServiceException(ExceptionMsg.CERTIFICATION_ERROR_MSG);
         }
     }
 }
