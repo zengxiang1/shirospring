@@ -1,4 +1,4 @@
-package org.zx.learn.controller;
+package org.zx.learn.controller.resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.zx.learn.dto.SysRoleDTO;
 import org.zx.learn.dto.UserDTO;
 import org.zx.learn.entity.ResultEntity;
 import org.zx.learn.service.UserService;

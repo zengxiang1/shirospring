@@ -1,4 +1,4 @@
-package org.zx.learn.controller;
+package org.zx.learn.controller.resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class BaseController {
         ResultEntity resultEntity = new ResultEntity();
         resultEntity.setCode(0);
         resultEntity.setMsg("成功");
-        resultEntity.setData(object);
+        resultEntity.setData(object == null ? "" : object);
         return new ResponseEntity<ResultEntity>(resultEntity, HttpStatus.OK);
     }
 
@@ -42,9 +42,9 @@ public class BaseController {
         ResultEntity resultEntity = null;
         if (ex instanceof ServiceException) {
             ServiceException serviceException = (ServiceException) ex;
-            resultEntity = new ResultEntity(serviceException.getErrorCode(), serviceException.getErrorMsg());
+            resultEntity = new ResultEntity(serviceException.getErrorCode(), serviceException.getErrorMsg(),"");
         } else {
-            resultEntity = new ResultEntity(1, ex.getMessage());
+            resultEntity = new ResultEntity(1, ex.getMessage(),"");
         }
         return new ResponseEntity<ResultEntity>(resultEntity, HttpStatus.OK);
     }
