@@ -33,9 +33,9 @@ public class ResourceController extends BaseController{
         return buildSuccessResult(resourceService.listResourceByParent(id));
     }
 
-    @RequestMapping( value = "/deleteResource/{id}",produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+    @RequestMapping( value = "/delete",produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<ResultEntity> deleteResource(List<SysResourceDTO> sysResourceDTOS) {
+    public ResponseEntity<ResultEntity> deleteResource(@RequestBody List<SysResourceDTO> sysResourceDTOS) {
         List<Integer> ids = new ArrayList<Integer>();
         for (SysResourceDTO sysResourceDTO: sysResourceDTOS) {
             ids.add(sysResourceDTO.getId());
