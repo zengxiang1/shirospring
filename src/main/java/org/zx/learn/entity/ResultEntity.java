@@ -1,8 +1,5 @@
 package org.zx.learn.entity;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Created by xiang zeng on 2017/10/30.
  *
