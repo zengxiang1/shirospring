@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.zx.learn.dto.AuthDTO;
 import org.zx.learn.dto.UserDTO;
 import org.zx.learn.entity.ResultEntity;
+import org.zx.learn.entity.vo.UserVO;
 import org.zx.learn.service.UserService;
 
 import java.util.ArrayList;
@@ -53,5 +55,38 @@ public class UserController extends BaseController{
         }
         userService.deleteUserInfoById(ids);
         return buildSuccessResult();
+    }
+
+    @RequestMapping(value = "editUserInfo",  consumes = MediaType.APPLICATION_JSON_VALUE, headers = "Accept=application/json")
+    @ResponseBody
+    public ResponseEntity<ResultEntity> editUserInfo(@RequestBody UserDTO userDTOS){
+        userService.editUserInfoById(userDTOS);
+        return buildSuccessResult();
+    }
+
+    @RequestMapping(value = "addUserInfo", consumes = MediaType.APPLICATION_JSON_VALUE, headers = "Accept=application/json")
+    @ResponseBody
+    public ResponseEntity<ResultEntity> addUserInfo(@RequestBody UserVO userVO){
+
+        AuthDTO authDTO = new AuthDTO();
+        UserDTO userDTO = new UserDTO();
+
+        authDTO.setAccountName(userVO.getAccountName());
+        authDTO.setAccountPwd(userVO.getAccountPwd());
+        authDTO.setSysRole(userVO.getSysRole());
+        userDTO.setAddress(userVO.getAddress());
+        userDTO.setAge(userVO.getAge());
+        userDTO.setPhoneNumber(userVO.getPhoneNumber());
+        userDTO.setRealName(userVO.getRealName());
+        userDTO.setSex(userVO.getSex());
+
+        Map<String, String> resultMap = userService.addUserInfo(userDTO,authDTO);
+        if ("0".equals(resultMap.get("code"))){
+            return buildErrorResult(0,resultMap.get("msg"));
+        }else{
+            return buildSuccessResult();
+        }
+
+
     }
 }
