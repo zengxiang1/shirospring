@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import org.zx.learn.dto.SysResourceDTO;
 import org.zx.learn.entity.ResultEntity;
 import org.zx.learn.service.ResourceService;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by xiang zeng on 2017/11/29.
- *
+
  * @author xiang zeng
  */
 @Controller

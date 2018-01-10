@@ -1,15 +1,15 @@
 package org.zx.learn.controller.resource;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.zx.learn.dto.AuthDTO;
 import org.zx.learn.dto.UserDTO;
 import org.zx.learn.entity.ResultEntity;
 import org.zx.learn.service.UserService;
@@ -38,7 +38,7 @@ public class UserController extends BaseController{
     @ResponseBody
     public ResponseEntity<ResultEntity> getAllUser(){
 
-        Map<String,String> paramsMap = new HashMap<String, String>();
+        Map<String,String> paramsMap = new HashMap<>();
         List<UserDTO> resultList = userService.getAllUser(paramsMap);
         return buildSuccessResult(resultList);
     }
@@ -47,11 +47,19 @@ public class UserController extends BaseController{
     @ResponseBody
     public ResponseEntity<ResultEntity> deleteUserInfo(@RequestBody List<UserDTO> userDTOS){
 
-        List<Integer> ids = new ArrayList<Integer>();
+        List<Integer> ids = new ArrayList<>();
         for (UserDTO userDTO : userDTOS) {
             ids.add(userDTO.getId());
         }
         userService.deleteUserInfoById(ids);
         return buildSuccessResult();
+    }
+
+    @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResultEntity> getUserInfo(){
+        AuthDTO sysUser = (AuthDTO) SecurityUtils.getSubject().getPrincipal();
+        UserDTO userDTO = userService.getUserById(sysUser.getUserId());
+        return buildSuccessResult(userDTO);
     }
 }
