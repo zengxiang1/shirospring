@@ -1,5 +1,9 @@
 package org.zx.learn.entity.vo;
 
+import org.zx.learn.dto.SysResourceDTO;
+
+import java.util.List;
+
 /**
  * Created on 2017/12/27.
  *
@@ -15,11 +19,13 @@ public class UserVO {
     private String address;
     private String accountName;
     private String accountPwd;
+    private List<SysResourceDTO> permissionList;
 
     public UserVO() {
     }
 
-    public UserVO(String sysRole, String realName, int age, String sex, String phoneNumber, String address, String accountName, String accountPwd) {
+    public UserVO(String sysRole, String realName, int age, String sex, String phoneNumber, String address, String accountName,
+                  String accountPwd, List<SysResourceDTO> permissionList) {
         this.sysRole = sysRole;
         this.realName = realName;
         this.age = age;
@@ -28,6 +34,7 @@ public class UserVO {
         this.address = address;
         this.accountName = accountName;
         this.accountPwd = accountPwd;
+        this.permissionList = permissionList;
     }
 
     public String getSysRole() {

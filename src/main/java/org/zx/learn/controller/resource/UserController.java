@@ -1,6 +1,8 @@
 package org.zx.learn.controller.resource;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,14 +84,15 @@ public class UserController extends BaseController{
         UserDTO userDTO = new UserDTO();
 
         authDTO.setAccountName(userVO.getAccountName());
-        authDTO.setAccountPwd(userVO.getAccountPwd());
+        //authDTO.setAccountPwd(userVO.getAccountPwd());
         authDTO.setSysRole(userVO.getSysRole());
         userDTO.setAddress(userVO.getAddress());
         userDTO.setAge(userVO.getAge());
         userDTO.setPhoneNumber(userVO.getPhoneNumber());
         userDTO.setRealName(userVO.getRealName());
         userDTO.setSex(userVO.getSex());
-
+        SimpleHash simpleHash = new SimpleHash("MD5",userVO.getAccountPwd());
+        authDTO.setAccountPwd(simpleHash.toHex());
         Map<String, String> resultMap = userService.addUserInfo(userDTO,authDTO);
         if ("0".equals(resultMap.get("code"))){
             return buildErrorResult(0,resultMap.get("msg"));

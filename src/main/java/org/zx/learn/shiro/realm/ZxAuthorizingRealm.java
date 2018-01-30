@@ -3,6 +3,8 @@ package org.zx.learn.shiro.realm;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -15,6 +17,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.zx.learn.dto.AuthDTO;
+import org.zx.learn.dto.SysResourceDTO;
 import org.zx.learn.service.UserService;
 
 /**
@@ -29,7 +32,13 @@ public class ZxAuthorizingRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         List<String> permissions = new ArrayList<>();
-        permissions.add("user:create");
+        AuthDTO authDTO = (AuthDTO) SecurityUtils.getSubject().getPrincipal();
+        List<SysResourceDTO> sysResourceDTOList = userService.listResourcePermissions(authDTO.getId());
+        for (SysResourceDTO sysResourceDTO : sysResourceDTOList) {
+            if (! "".equals(sysResourceDTO.getResourcePermission())){
+                permissions.add(sysResourceDTO.getResourcePermission());
+            }
+        }
         simpleAuthorizationInfo.addStringPermissions(permissions);
         return simpleAuthorizationInfo;
     }

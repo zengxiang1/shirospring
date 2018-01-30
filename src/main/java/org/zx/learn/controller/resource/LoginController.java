@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.zx.learn.dto.AuthDTO;
 import org.zx.learn.entity.ResultEntity;
 import org.zx.learn.exception.ExceptionMsg;
 import org.zx.learn.service.UserService;
@@ -60,7 +61,8 @@ public class LoginController extends BaseController{
     public ResponseEntity<ResultEntity> loginWeb(HttpServletRequest request) {
         logger.info("check login.......");
         if (SecurityUtils.getSubject().isAuthenticated()){
-            return buildSuccessResult(userService.listAllMenu());
+            AuthDTO authDTO = (AuthDTO) SecurityUtils .getSubject().getPrincipal();
+            return buildSuccessResult(userService.listResourcePermissions(authDTO.getId()));
         }
         else {
             String exceptionName = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
